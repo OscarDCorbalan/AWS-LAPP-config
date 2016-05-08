@@ -69,13 +69,12 @@ The first command will update package references, while the second actually upda
 
 ### Configure RSA authorization for SSH
 
-[DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)
-[Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
+[DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server), [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
 
 Generate SSH key pairs **on the local machine**; a private key file must be treated as your biggest secret.
 
 **Linux**:
-  * Create key filling the data the command asks:
+  * Create key filling the data the command asks for:
     * `$ ssh-keygen`
   * Copy the public id to the server:
     * `$ ssh-copy-id grader@PUBLIC-IP-ADDRESS -p2200`
@@ -103,8 +102,21 @@ Generate SSH key pairs **on the local machine**; a private key file must be trea
   * `$ sudo vi /etc/ssh/sshd_config`
     * Change PermitRootLogin from without-password to no.
 
+**FROM NOW ON ALL SSH ACCESS SHOULD BE DONE AS `grader` WITH THE PRIVATE KEY FILE** 
 
 ### Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+
+  * Set up default rules:
+    * `$ sudo ufw default deny incoming`
+    * `$ sudo ufw default alow outgoing`
+  * Allow incoming TCP packets on port 2200 (SSH):
+    * `$ sudo ufw allow 2200/tcp`
+  * Allow incoming TCP packets on port 80 (HTTP):
+    * `$ sudo ufw allow 80/tcp`
+  * Allow incoming UDP packets on port 123 (NTP):
+    * `$ sudo ufw allow 123/udp`
+  * Enable Firewall:
+    * `$sudo ufw enable`
 
 ### Configure the local timezone to UTC
 
