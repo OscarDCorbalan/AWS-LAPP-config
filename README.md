@@ -67,7 +67,38 @@ The first command will update package references, while the second actually upda
 
 **From now on**, your SSH connection has to be configured on **port 2200** and **use `grader`** to log in.
 
-### Extra: Deny root's SSH
+### Configure RSA authorization for SSH
+
+[DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)
+[Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
+
+Generate SSH key pairs **on the local machine**; a private key file must be treated as your biggest secret.
+
+**Linux**:
+  * Create key filling the data the command asks:
+    * `$ ssh-keygen`
+  * Copy the public id to the server:
+    * `$ ssh-copy-id grader@PUBLIC-IP-ADDRESS -p2200`
+  * Login with the new user:
+    * `$ ssh -v grader@PUBLIC-IP-ADDRESS -p2200`
+  * Deny again password authentication:
+    * `$ sudo vim /etc/ssh/sshd_config`
+    * Change PasswordAuthentication back from yes to no.
+
+**Windows**:
+  * Create a key pair with Puttygen
+  * Access as `grader` with Putty, and from $HOME, run:
+    * `$ mkdir .ssh`
+    * `$ chmod 700 .ssh`
+    * `$ touch .ssh/authorized_keys`
+    * `$ chmod 644 .ssh/authorized_keys` 
+    * `$ vi .ssh/authorized_keys`
+      * Copy in the public key just generated with Puttygen.
+  * Deny again password authentication:
+    * `$ sudo vim /etc/ssh/sshd_config`
+    * Change PasswordAuthentication back from yes to no.
+  
+### Extra: Deny root's SSH access
 
   * `$ sudo vi /etc/ssh/sshd_config`
     * Change PermitRootLogin from without-password to no.
