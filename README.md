@@ -27,7 +27,7 @@ Considering the private key is named udacity_key.rsa:
   * SSH into the instance:
     * `$ ssh -i ~/.ssh/udacity_key.rsa root@PUPLIC-IP-ADDRESS`
  
-Windows:
+**Windows**:
   * Download private key.
   * Use Puttygen to save the key in .ppk (Putty's) format.
   * Configure Putty to use the public IP of the server and the just created .ppk
