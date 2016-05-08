@@ -1,7 +1,7 @@
 # AWS-LAPP-config
 LAPP (Linux, Apache, Python, Postgres) stack configuration for an Amazon AWS server
 
-## Server data
+## Access data
 
 The server is hosting https://github.com/OscarDoc/restaurants at:
   * http://52.26.206.3
@@ -12,13 +12,13 @@ Info for the reviewer:
 
 ## Configuration
 
-### Server access:
+### How to acess the server
 
 [Udacity](https://www.udacity.com/account#!/development_environment)
 
 Considering the private key is named udacity_key.rsa:
 
-Linux:
+**Linux**:
   * Download private key for the AWS instance. 
   * Move the private key file into the folder ~/.ssh:
     * `$ mv ~/Downloads/udacity_key.rsa ~/.ssh/`
@@ -65,9 +65,8 @@ The first command will update package references, while the second actually upda
   * Restart SSH:
     * `sudo service ssh restart`
 
-Change ssh config file:
-Open the config file:
-$ vim /etc/ssh/sshd_config
+**From now on**, your SSH connection has to be configured on **port 2200** and **use `grader`** to log in.
+
 ### Extra: Deny root's SSH
 
   * `$ sudo vi /etc/ssh/sshd_config`
