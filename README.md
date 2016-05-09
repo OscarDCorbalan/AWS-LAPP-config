@@ -179,7 +179,7 @@ Do not allow remote connections:
 
 ### Install git, clone and setup Catalog App project 
 
-Sources: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux), [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps), [StackOverflow (virtualenv)](http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip), [StackOverflow (block .git)](http://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible), [StackOverflow (pip requirements.txt)[http://stackoverflow.com/questions/7225900/how-to-pip-install-packages-according-to-requirements-txt-from-a-local-directory]
+Sources: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux), [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps), [StackOverflow (virtualenv)](http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip), [StackOverflow (block .git)](http://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible), [StackOverflow (pip requirements.txt)[http://stackoverflow.com/questions/7225900/how-to-pip-install-packages-according-to-requirements-txt-from-a-local-directory], [UD 330 - Authentication & Authorization: OAuth](https://www.udacity.com/course/authentication-authorization-oauth--ud330)
 
 Install git, setting name and username:
   * `$ sudo apt-get install git`
@@ -288,11 +288,26 @@ Prepare application data:
   * Create postgreSQL database schema:
     * `$ python database_setup.py`
 
-Your README.md file should include all of the following:
-i. The IP address and SSH port so your server can be accessed by the reviewer.
-ii. The complete URL to your hosted web application.
-iii. A summary of software you installed and configuration changes made.
-iv. A list of any third-party resources you made use of to complete this project.
-
-
-
+Configure OAuth:
+  * **Setup hostname**:
+    * Copy hostname that appears at http://www.hcidata.info/host2ip.cgi by filling the server's public ip address.
+    * `$ sudo vim /etc/apache2/sites-available/catalog.conf`
+    * Paste in the following line below ServerAdmin:
+      * `ServerAlias HOSTNAME` where HOSTNAME is the name you got in that website
+    * Enable the virtual host:
+      * `$ sudo a2ensite catalog`
+  * **Facebook**, go to https://developers.facebook.com/apps/
+    * Click on your App, go to Settings and fill, in Site URL, the public IP-Address including prefixed http:// 
+    * To leave the development mode:
+      * Fill in a contact email address in app Configuration
+      * Go to Review and switch it to public
+  *  **Google**, go to https://console.developers.google.com/home/dashboard:
+    * Select your app and go to __Credentials__
+    * Click on web client (should have one from development) and fill in:
+      * The JavaScript origin URL as before (http://public-ip)
+      * All the URIs allowed, using the hostname:
+        * http://hostname/login
+        * http://hostname/gconnect
+        * http://hostname/gdisconnect
+      * Save the config and download the updated secrets JSON.
+      * Synchronize through git, or upload the .json file to the project folder, overriding the existing one.
