@@ -32,7 +32,7 @@ Considering the private key is named udacity_key.rsa:
   * Use Puttygen to save the key in .ppk (Putty's) format.
   * Configure Putty to use the public IP of the server and the just created .ppk
 
-### Create a sudoer user
+### Create a sudoer user that required password to sudo
 
 Sources: [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
 
@@ -42,7 +42,7 @@ Logged in as `root`:
     * Set a secret password
   * Give `grader` permission to sudo by editing Ubuntu's sudoers.d file as root:
     * `vi /etc/sudoers.d/grader`
-    * Copy in the file: `grader ALL=(ALL) NOPASSWD:ALL`
+    * Copy in the file: `grader ALL=(ALL) PASSWD:ALL`
  
 ### Update all currently installed packages
 
