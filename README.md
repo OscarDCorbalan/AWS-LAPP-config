@@ -12,9 +12,9 @@ Info for the reviewer:
 
 ## Configuration
 
-### How to acess the server
+### How to access the server
 
-[Udacity](https://www.udacity.com/account#!/development_environment)
+Sources: [Udacity](https://www.udacity.com/account#!/development_environment)
 
 Considering the private key is named udacity_key.rsa:
 
@@ -34,7 +34,7 @@ Considering the private key is named udacity_key.rsa:
 
 ### Create a sudoer user
 
-[Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
+Sources: [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
 
 Logged in as `root`:
   * Create a new user named `grader`:
@@ -46,7 +46,7 @@ Logged in as `root`:
  
 ### Update all currently installed packages
 
-[Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
+Sources: [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
 
 Run:
   * `sudo apt-get update`
@@ -56,7 +56,7 @@ The first command will update package references, while the second actually upda
 
 ### Change the SSH port from 22 to 2200
 
-[Ask Ubuntu answer](http://askubuntu.com/a/16661)
+Sources: [Ask Ubuntu answer](http://askubuntu.com/a/16661)
 
   * `sudo vi /etc/ssh/sshd_config`
     * Change Port to 2200
@@ -69,7 +69,7 @@ The first command will update package references, while the second actually upda
 
 ### Configure RSA authorization for SSH
 
-[DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server), [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
+Sources: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server), [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299), [GitHub Help](https://help.github.com/articles/generating-an-ssh-key/)
 
 Generate SSH key pairs **on the local machine**; a private key file must be treated as your biggest secret.
 
@@ -99,12 +99,16 @@ Generate SSH key pairs **on the local machine**; a private key file must be trea
   
 ### Extra: Deny root's SSH access
 
+Sources: [Ask Ubuntu](http://askubuntu.com/questions/27559/how-do-i-disable-remote-ssh-login-as-root-from-a-server)
+
   * `$ sudo vi /etc/ssh/sshd_config`
     * Change PermitRootLogin from without-password to no.
 
 **FROM NOW ON ALL SSH ACCESS SHOULD BE DONE AS `grader` WITH THE PRIVATE KEY FILE** 
 
 ### Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+
+Sources: [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
 
   * Set up default rules:
     * `$ sudo ufw default deny incoming`
@@ -119,6 +123,17 @@ Generate SSH key pairs **on the local machine**; a private key file must be trea
     * `$sudo ufw enable`
 
 ### Configure the local timezone to UTC
+
+Sources: [Ubuntu site](https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29), [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
+
+  * Open the timezone selection dialog:
+    * $ sudo dpkg-reconfigure tzdata
+  * Then chose 'None of the above', then UTC.
+
+### Extra: Setup the ntp daemon
+
+Install ntp daemon to do regular time syncs:
+  * $ sudo apt-get install ntp
 
 ### Install and configure Apache to serve a Python mod_wsgi application
 
