@@ -177,7 +177,43 @@ Create a new user named catalog that has limited permissions to the catalog appl
 Do not allow remote connections:
   * Check that no remote connections are allowed (default): `$ sudo vim /etc/postgresql/9.3/main/pg_hba.conf`
 
-### Install git, clone and setup your Catalog App project (from your GitHub repository from earlier in the Nanodegree program) so that it functions correctly when visiting your server’s IP address in a browser. Remember to set this up appropriately so that your .git directory is not publicly accessible via a browser!
+### Install git, clone and setup Catalog App project 
+
+Sources: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux), [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps), [StackOverflow](http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip)
+
+Install git, setting name and username:
+  * `$ sudo apt-get install git`
+  * `$ git config --global user.name "YOUR NAME"`
+  * `$ git config --global user.email "YOUR EMAIL ADDRESS"`
+
+Setup wsgi for Flask:
+  * Install required packages: 
+    * `$ sudo apt-get install libapache2-mod-wsgi python-dev`
+  * Enable mod_wsgi (if not already enabled):
+    * `$ sudo a2enmod wsgi`
+  * Create a structure for the Flask app:
+    * `$ cd /var/www`
+    * `$ sudo mkdir catalog`
+    * `$ cd catalog`
+    * `$ sudo mkdir catalog`
+    * `$ cd catalog`
+    * `$ sudo mkdir static templates`
+
+Install Flask:
+  * Install  PIP:
+    * `$ sudo apt-get install python-pip`
+  * Install virtualenv:
+    * `$ sudo pip install virtualenv`
+  * Set virtual environment to name 'venv':
+    * `$ sudo virtualenv venv`
+  * Enable all permissions for the new virtual environment (no sudo should be used within):
+    * `$ sudo chmod -R 777 venv`
+  * Activate the virtual environment:
+    * `$ source venv/bin/activate`
+  * Install Flask inside the virtual environment:
+    * `$ pip install Flask`
+  * Deactivate the environment:
+    * `$ deactivate`
 
   * Open the database setup file: `$ sudo vim database_setup.py`
   * Change the line starting with "engine" to (fill in a password):
