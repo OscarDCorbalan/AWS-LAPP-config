@@ -128,7 +128,7 @@ Configure `ufw` to only allow incoming connections for SSH (port 2200), HTTP (po
 Sources: [Ubuntu site](https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29), [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
 
   * Open the timezone selection dialog:
-    * $ sudo dpkg-reconfigure tzdata
+    * `$ sudo dpkg-reconfigure tzdata`
   * Then chose 'None of the above', then UTC.
 
 ### Extra: Setup the ntp daemon
@@ -136,9 +136,22 @@ Sources: [Ubuntu site](https://help.ubuntu.com/community/UbuntuTime#Using_the_Co
 Sources: [Ubuntu site](https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29)
 
 Install ntp daemon to do regular time syncs:
-  * $ sudo apt-get install ntp
+  * `$ sudo apt-get install ntp`
 
 ### Install and configure Apache to serve a Python mod_wsgi application
+
+Sources: [Udacity blog](http://blog.udacity.com/2015/03/step-by-step-guide-install-lamp-linux-apache-mysql-python-ubuntu.html), [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299), [Ask Ubuntu](http://askubuntu.com/questions/256013/could-not-reliably-determine-the-servers-fully-qualified-domain-name)
+
+  * Install Apache web server:
+    * `$ sudo apt-get install apache2`
+  * Open a browser and open the public ip address. It should say 'It works!' on the top of the page.
+  * Install mod_wsgi for serving Python apps from Apache and the helper package python-setuptools:
+    * `$ sudo apt-get install python-setuptools libapache2-mod-wsgi`
+  * Restart the Apache server for mod_wsgi to load:
+    * `$ sudo service apache2 restart`
+  * Get rid of the message __Could not reliably determine the servers's fully qualified domain name__ after restart:
+    * `$ sudo vi /etc/apache2/apache2.conf`
+    * Add `ServerName localhost` at the end of the file.
 
 ### Install and configure PostgreSQL:
 
