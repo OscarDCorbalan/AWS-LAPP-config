@@ -280,16 +280,13 @@ Install needed modules:
     * `$ sudo apt-get install python-psycopg2`
   * `$ deactivate` 
 
-
-
-Open the database setup file: `$ sudo vim database_setup.py`
-Change the line starting with "engine" to (fill in a password):
-python engine = create_engine('postgresql://catalog:PW-FOR-DB@localhost/catalog')
-Change the same line in application.py respectively
-Rename application.py:
-$ mv application.py __init__.py
-Create postgreSQL database schema:
-$ python database_setup.py
+Prepare application data:
+  * Open the database setup file: `$ sudo vim database_setup.py`
+  * Change engine variable to (write your password):
+    * `engine = create_engine('postgres://catalog:PW-FOR-DB@localhost/catalog')`
+  * Change engine in the same way in **daos.py** and **project.py**
+  * Create postgreSQL database schema:
+    * `$ python database_setup.py`
 
 Your README.md file should include all of the following:
 i. The IP address and SSH port so your server can be accessed by the reviewer.
