@@ -242,6 +242,22 @@ Configure a New Virtual Host
   * Enable the virtual host:
     * `$ sudo a2ensite catalog`
 
+Create WSGI file:
+  * `$ cd /var/www/catalog`
+  * `$ sudo vim catalog.wsgi`
+  * Paste in the following lines of code:
+  ```
+    #!/usr/bin/python
+    import sys
+    import logging
+    logging.basicConfig(stream=sys.stderr)
+    sys.path.insert(0,"/var/www/catalog/catalog/venv")
+    from catalog import app as application
+  ```
+  
+  * Restart Apache:
+    `$ sudo service apache2 restart`
+
 
 Open the database setup file: `$ sudo vim database_setup.py`
 Change the line starting with "engine" to (fill in a password):
