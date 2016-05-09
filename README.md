@@ -179,7 +179,7 @@ Do not allow remote connections:
 
 ### Install git, clone and setup Catalog App project 
 
-Sources: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux), [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps), [StackOverflow (virtualenv)](http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip), [StackOverflow (block .git)](http://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible)
+Sources: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux), [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps), [StackOverflow (virtualenv)](http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip), [StackOverflow (block .git)](http://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible), [StackOverflow (pip requirements.txt)[http://stackoverflow.com/questions/7225900/how-to-pip-install-packages-according-to-requirements-txt-from-a-local-directory]
 
 Install git, setting name and username:
   * `$ sudo apt-get install git`
@@ -266,6 +266,21 @@ Clone GitHub repository and make it web inaccessible
     * `$ cd /var/www/catalog/`
     * `$ sudo vim .htaccess`
     * Write inside: `RedirectMatch 404 /\.git`
+
+Install needed modules:
+  * Activate virtual environment:
+    * `$ source venv/bin/activate`
+  * Install project requirements:
+    * `$ cd /var/www/catalog/catalog/`
+    * `$ pip install -r requirements.txt`
+  * Install global packages:
+    * `$ sudo pip install flask-seasurf`
+    * `$ sudo pip install --upgrade oauth2client`
+    * `$ sudo pip install sqlalchemy`
+    * `$ sudo apt-get install python-psycopg2`
+  * `$ deactivate` 
+
+
 
 Open the database setup file: `$ sudo vim database_setup.py`
 Change the line starting with "engine" to (fill in a password):
