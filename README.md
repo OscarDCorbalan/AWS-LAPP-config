@@ -179,7 +179,7 @@ Do not allow remote connections:
 
 ### Install git, clone and setup Catalog App project 
 
-Sources: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux), [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps), [StackOverflow](http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip)
+Sources: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux), [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps), [StackOverflow (virtualenv)](http://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip), [StackOverflow (block .git)](http://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible)
 
 Install git, setting name and username:
   * `$ sudo apt-get install git`
@@ -258,6 +258,14 @@ Create WSGI file:
   * Restart Apache:
     `$ sudo service apache2 restart`
 
+Clone GitHub repository and make it web inaccessible
+  * `$ git clone https://github.com/OscarDoc/restaurants.git`
+  * Move all content cloned to `/var/www/catalog/catalog/`
+  * Move the `static` cloned directory to `/var/www/catalog/static`
+  * Make the GitHub repository inaccessible:
+    * `$ cd /var/www/catalog/`
+    * `$ sudo vim .htaccess`
+    * Write inside: `RedirectMatch 404 /\.git`
 
 Open the database setup file: `$ sudo vim database_setup.py`
 Change the line starting with "engine" to (fill in a password):
