@@ -155,17 +155,44 @@ Sources: [Udacity blog](http://blog.udacity.com/2015/03/step-by-step-guide-insta
 
 ### Install and configure PostgreSQL:
 
-### Do not allow remote connections
+Sources: [DigitalOcean[(https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps)
 
-### Create a new user named catalog that has limited permissions to your catalog application database
+Create a new user named catalog that has limited permissions to the catalog application database
+  * Install PostgreSQL: `$ sudo apt-get install postgresql postgresql-contrib`
+  * Check that no remote connections are allowed (default): `$ sudo vim /etc/postgresql/9.3/main/pg_hba.conf`
+  * Create needed linux user for psql: `$ sudo adduser catalog`
+  * Change to default user postgres: `$ sudo su - postgres`
+  * Connect to the system: `$ psql`
+  * Add postgre user with password and it to create tables:(# stands for the command prompt in psql):
+    * `# CREATE USER catalog WITH PASSWORD 'PW-FOR-DB';`
+    * `# ALTER USER catalog CREATEDB;`
+  * Create database: `# CREATE DATABASE catalog WITH OWNER catalog;`
+  * Connect to the database catalog `# \c catalog`
+  * Revoke all rights: `# REVOKE ALL ON SCHEMA public FROM public;`
+  * Grant only access to the catalog role: `# GRANT ALL ON SCHEMA public TO catalog;`
+  * Exit out of PostgreSQl and the postgres user:
+    * `# \q`
+    * `$ exit`
+
+Do not allow remote connections:
+  * Check that no remote connections are allowed (default): `$ sudo vim /etc/postgresql/9.3/main/pg_hba.conf`
 
 ### Install git, clone and setup your Catalog App project (from your GitHub repository from earlier in the Nanodegree program) so that it functions correctly when visiting your server’s IP address in a browser. Remember to set this up appropriately so that your .git directory is not publicly accessible via a browser!
 
+  * Open the database setup file: `$ sudo vim database_setup.py`
+  * Change the line starting with "engine" to (fill in a password):
+python engine = create_engine('postgresql://catalog:PW-FOR-DB@localhost/catalog')
+Change the same line in application.py respectively
+Rename application.py:
+$ mv application.py __init__.py
+Create postgreSQL database schema:
+$ python database_setup.py
 
 Your README.md file should include all of the following:
 i. The IP address and SSH port so your server can be accessed by the reviewer.
 ii. The complete URL to your hosted web application.
 iii. A summary of software you installed and configuration changes made.
 iv. A list of any third-party resources you made use of to complete this project.
+
 
 
