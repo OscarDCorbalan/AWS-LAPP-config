@@ -106,10 +106,11 @@ Sources: [Ask Ubuntu](http://askubuntu.com/questions/27559/how-do-i-disable-remo
 
 **FROM NOW ON ALL SSH ACCESS SHOULD BE DONE AS `grader` WITH THE PRIVATE KEY FILE** 
 
-### Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+### Configure the Uncomplicated Firewall (UFW)
 
 Sources: [Course UD 229 - Configuring Linux Web Servers](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
 
+Configure `ufw` to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123):
   * Set up default rules:
     * `$ sudo ufw default deny incoming`
     * `$ sudo ufw default alow outgoing`
