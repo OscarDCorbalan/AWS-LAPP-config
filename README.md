@@ -215,8 +215,36 @@ Install Flask:
   * Deactivate the environment:
     * `$ deactivate`
 
-  * Open the database setup file: `$ sudo vim database_setup.py`
-  * Change the line starting with "engine" to (fill in a password):
+Configure a New Virtual Host
+  * Create a virtual host config file
+    * `$ sudo nano /etc/apache2/sites-available/catalog.conf`
+  * Paste in the following lines of code and change names and addresses regarding your application:
+  ```
+<VirtualHost *:80>
+      ServerName PUBLIC-IP-ADDRESS
+      ServerAdmin admin@PUBLIC-IP-ADDRESS
+      WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+      <Directory /var/www/catalog/catalog/>
+          Order allow,deny
+          Allow from all
+      </Directory>
+      Alias /static /var/www/catalog/catalog/static
+      <Directory /var/www/catalog/catalog/static/>
+          Order allow,deny
+          Allow from all
+      </Directory>
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      LogLevel warn
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
+  </VirtualHost>
+  ```
+  
+  * Enable the virtual host:
+    * `$ sudo a2ensite catalog`
+
+
+Open the database setup file: `$ sudo vim database_setup.py`
+Change the line starting with "engine" to (fill in a password):
 python engine = create_engine('postgresql://catalog:PW-FOR-DB@localhost/catalog')
 Change the same line in application.py respectively
 Rename application.py:
