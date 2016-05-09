@@ -132,6 +132,8 @@ Sources: [Ubuntu site](https://help.ubuntu.com/community/UbuntuTime#Using_the_Co
 
 ### Extra: Setup the ntp daemon
 
+Sources: [Ubuntu site](https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29)
+
 Install ntp daemon to do regular time syncs:
   * $ sudo apt-get install ntp
 
