@@ -3,12 +3,8 @@ LAPP (Linux, Apache, Python, Postgres) stack configuration for an Amazon AWS ser
 
 ## Access data
 
-The server is hosting https://github.com/OscarDoc/restaurants at:
-  * http://52.26.206.3
-
-Info for the reviewer:
-  * IP: 52.26.206.3
-  * SSH Port: 2200
+The server is hosting https://github.com/OscarDCorbalan/restaurants at:
+  * http://*
 
 ## Configuration
 
